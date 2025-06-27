@@ -1,1 +1,10 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    prefer_const_constructors: true
+    avoid_print: true
+    unnecessary_this: true
+    sort_constructors_first: true
+    prefer_single_quotes: true
+    directives_ordering: true
