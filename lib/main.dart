@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wander_nest/core/themes/app_theme.dart';
-import 'package:wander_nest/presentation/screens/campsite_list_screen.dart';
+import 'package:wander_nest/presentation/screens/home_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: CampingSiteApp()));
@@ -18,7 +18,7 @@ class CampingSiteApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      home: const CampsiteListScreen(),
+      home: const HomeScreen(),
     );
   }
 }
