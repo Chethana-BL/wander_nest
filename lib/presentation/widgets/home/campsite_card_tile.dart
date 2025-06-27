@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/data/models/campsite.dart';
+import 'package:wander_nest/presentation/screens/campsite_detail_screen.dart';
 import 'package:wander_nest/presentation/widgets/home/campsite_card.dart';
 
 class CampsiteCardTile extends StatelessWidget {
@@ -12,7 +13,12 @@ class CampsiteCardTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // TODO:  Navigate to the campsite detail screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => CampsiteDetailScreen(campsite: campsite),
+          ),
+        );
       },
       borderRadius: BorderRadius.circular(AppSizes.radius),
       child: CampsiteCard(campsite: campsite),
