@@ -32,7 +32,7 @@ class CampsiteCard extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 16 / 9,
                   child: Image.network(
-                    campsite.photo,
+                    campsite.photo.secureUrl(),
                     fit: BoxFit.cover,
                     errorBuilder:
                         (context, error, stackTrace) => const Center(

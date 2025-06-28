@@ -32,7 +32,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
                     child: Image.network(
-                      campsite.photo,
+                      campsite.photo.secureUrl(),
                       width: double.infinity,
                       fit: BoxFit.cover,
                       errorBuilder:
