@@ -15,7 +15,7 @@ class AppSizes {
   static const double spaceLG = 24;
   static const double spaceXL = 32;
 
-  // // Radius
+  // Radius
   static const double radiusSM = 6;
   static const double radius = 12;
   static const double radiusLG = 20;

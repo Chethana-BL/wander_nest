@@ -4,6 +4,7 @@ import 'package:wander_nest/application/providers/campsite_provider.dart';
 import 'package:wander_nest/application/providers/filters/filtered_campsites_provider.dart';
 import 'package:wander_nest/presentation/widgets/filter_panel/filter_action_icon.dart';
 import 'package:wander_nest/presentation/widgets/filter_panel/filter_overlay_panel.dart';
+import 'package:wander_nest/presentation/widgets/home/app_error_message.dart';
 import 'package:wander_nest/presentation/widgets/home/responsive_campsite_view.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -33,9 +34,10 @@ class HomeScreen extends ConsumerWidget {
       body: campsiteListAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error:
-            (err, _) => Center(
-              child: Text('Error: ${err.toString()}'),
-            ), //TODO: Create Error Widget
+            (err, _) => AppErrorMessage(
+              message: 'Error: ${err.toString()}',
+              onRetry: () => ref.refresh(campsiteListProvider),
+            ),
         data: (allCampsites) {
           final filteredCampsites = ref.watch(filteredCampsitesProvider);
 
