@@ -31,7 +31,7 @@ class PriceRangeSlider extends StatelessWidget {
           values: currentRange,
           min: min,
           max: max,
-          divisions: (max - min).toInt(),
+          divisions: ((max - min) ~/ 20),
           labels: RangeLabels(
             '€${currentRange.start.round()}',
             '€${currentRange.end.round()}',

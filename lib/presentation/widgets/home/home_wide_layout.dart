@@ -60,7 +60,7 @@ class HomeWideLayout extends ConsumerWidget {
                         crossAxisCount: crossAxisCount,
                         mainAxisSpacing: AppSizes.space,
                         crossAxisSpacing: AppSizes.space,
-                        childAspectRatio: 0.75,
+                        childAspectRatio: 0.95,
                       ),
                       itemBuilder: (context, index) {
                         final campsite = filteredCampsites[index];
