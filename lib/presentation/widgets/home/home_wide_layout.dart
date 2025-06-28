@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/data/models/campsite.dart';
-import 'package:wander_nest/presentation/widgets/home/campsite_card_tile.dart';
+import 'package:wander_nest/presentation/widgets/home/campsite_card.dart';
 
 class HomeWideLayout extends StatelessWidget {
   const HomeWideLayout({
@@ -29,7 +29,7 @@ class HomeWideLayout extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final campsite = campsites[index];
-          return CampsiteCardTile(campsite: campsite);
+          return CampsiteCard(campsite: campsite);
         },
       ),
     );

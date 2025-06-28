@@ -15,7 +15,7 @@ class CampsiteFeatureRow extends StatelessWidget {
   final Campsite campsite;
   final double availableWidth;
 
-  bool get _showText => availableWidth > 280;
+  bool get _showText => availableWidth > 310;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class CampsiteFeatureRow extends StatelessWidget {
             labelAvailable: campsite.hostLanguages.join(', ').toUpperCase(),
             labelUnavailable: '',
             availableColor: customColors.hostLanguage,
-            showText: _showText,
+            showText: true,
           ),
       ],
     );
