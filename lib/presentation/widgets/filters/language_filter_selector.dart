@@ -27,6 +27,18 @@ class _LanguageFilterSelectorState extends State<LanguageFilterSelector> {
   }
 
   @override
+  void didUpdateWidget(covariant LanguageFilterSelector oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedLanguages != widget.selectedLanguages) {
+      setState(() {
+        _selectedLanguages = List.from(
+          widget.selectedLanguages.map((e) => e.toUpperCase()),
+        );
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: const Text('Host Languages'),

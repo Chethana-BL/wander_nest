@@ -1,30 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wander_nest/application/providers/filters/campsite_filter_notifier.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/data/models/campsite.dart';
+import 'package:wander_nest/presentation/widgets/filter_panel/active_filter_chips.dart';
 import 'package:wander_nest/presentation/widgets/home/campsite_card.dart';
+import 'package:wander_nest/presentation/widgets/home/home_empty_campsite.dart';
+import 'package:wander_nest/presentation/widgets/home/result_summary_banner.dart';
 
 class HomeCompactLayout extends ConsumerWidget {
-  const HomeCompactLayout({super.key, required this.campsites});
+  const HomeCompactLayout({
+    super.key,
+    required this.campsites,
+    required this.filteredCampsites,
+  });
 
   final List<Campsite> campsites;
+  final List<Campsite> filteredCampsites;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Widget content = const Center(child: Text('No Campsites Available'));
+    final filter = ref.watch(campsiteFilterProvider);
 
-    if (campsites.isNotEmpty) {
+    Widget content = const NoCampsiteFound();
+
+    if (filteredCampsites.isNotEmpty) {
       content = ListView.separated(
         padding: const EdgeInsets.all(AppSizes.padding),
-        itemCount: campsites.length,
+        itemCount: filteredCampsites.length,
         separatorBuilder: (_, __) => const SizedBox(height: AppSizes.space),
         itemBuilder: (context, index) {
-          final campsite = campsites[index];
+          final campsite = filteredCampsites[index];
           return CampsiteCard(campsite: campsite);
         },
       );
     }
 
-    return content;
+    return Column(
+      children: [
+        if (!filter.isEmpty)
+          const Padding(
+            padding: EdgeInsets.only(top: AppSizes.padding),
+            child: ActiveFilterChips(),
+          ),
+        if (filteredCampsites.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: AppSizes.padding),
+            child: ResultSummaryBanner(
+              totalCount: campsites.length,
+              filteredCount: filteredCampsites.length,
+            ),
+          ),
+        Expanded(child: content),
+      ],
+    );
   }
 }
