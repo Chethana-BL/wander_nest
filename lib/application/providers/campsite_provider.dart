@@ -12,8 +12,7 @@ final campsiteApiServiceProvider = Provider<CampsiteApiService>((ref) {
 /// Raw campsite list fetched from the API
 final campsiteListProvider = FutureProvider<List<Campsite>>((ref) async {
   final apiService = ref.watch(campsiteApiServiceProvider);
-  final campsites = await apiService.fetchCampsites();
-  return campsites;
+  return apiService.fetchCampsites();
 });
 
 /// Sorted campsite list (by label)
@@ -21,10 +20,12 @@ final sortedCampsiteListProvider = Provider<List<Campsite>>((ref) {
   final asyncValue = ref.watch(campsiteListProvider);
 
   return asyncValue.maybeWhen(
-    data:
-        (list) => [...list]..sort(
-          (a, b) => a.label.toLowerCase().compareTo(b.label.toLowerCase()),
-        ),
+    data: (list) {
+      list.sort(
+        (a, b) => a.label.toLowerCase().compareTo(b.label.toLowerCase()),
+      );
+      return list;
+    },
     orElse: () => [],
   );
 });

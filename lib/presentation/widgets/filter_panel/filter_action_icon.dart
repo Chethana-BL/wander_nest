@@ -26,9 +26,9 @@ class FilterActionIcon extends ConsumerWidget {
               backgroundColor: Theme.of(context).colorScheme.secondary,
               child: Text(
                 '$appliedCount',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onSecondary,
                   fontWeight: FontWeight.bold,
                 ),
               ),

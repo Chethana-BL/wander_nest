@@ -22,24 +22,24 @@ class ActiveFilterChips extends ConsumerWidget {
 
     if (filter.isCloseToWater != null) {
       chips.add(
-        _buildFilterChip(
-          context,
-          filter.isCloseToWater == true
-              ? 'Close to Water'
-              : 'Not Close to Water',
-          () => filterNotifier.toggleWaterFilter(null),
+        FilterChip(
+          label:
+              filter.isCloseToWater == true
+                  ? 'Close to Water'
+                  : 'Not Close to Water',
+          onDeleted: () => filterNotifier.toggleWaterFilter(null),
         ),
       );
     }
 
     if (filter.isCampFireAllowed != null) {
       chips.add(
-        _buildFilterChip(
-          context,
-          filter.isCampFireAllowed == true
-              ? 'Campfire Allowed'
-              : 'Campfire Not Allowed',
-          () => filterNotifier.toggleCampfireFilter(null),
+        FilterChip(
+          label:
+              filter.isCampFireAllowed == true
+                  ? 'Campfire Allowed'
+                  : 'Campfire Not Allowed',
+          onDeleted: () => filterNotifier.toggleCampfireFilter(null),
         ),
       );
     }
@@ -47,26 +47,26 @@ class ActiveFilterChips extends ConsumerWidget {
     if (filter.hostLanguages != null && filter.hostLanguages!.isNotEmpty) {
       for (final lang in filter.hostLanguages!) {
         chips.add(
-          _buildFilterChip(context, lang, () {
-            final newList = List<String>.from(filter.hostLanguages!);
-            newList.remove(lang);
-            filterNotifier.updateHostLanguages(
-              newList.isEmpty ? null : newList,
-            );
-          }),
+          FilterChip(
+            label: lang,
+            onDeleted: () {
+              final newList = List<String>.from(filter.hostLanguages!);
+              newList.remove(lang);
+              filterNotifier.updateHostLanguages(
+                newList.isEmpty ? null : newList,
+              );
+            },
+          ),
         );
       }
     }
 
     if (filter.priceRange != null && filter.priceRange != initialPriceRange) {
       chips.add(
-        _buildFilterChip(
-          context,
-          'Price: €${filter.priceRange!.start.round()} - \$${filter.priceRange!.end.round()}',
-          () => filterNotifier.updatePriceRange(
-            initialPriceRange.start,
-            initialPriceRange.end,
-          ),
+        FilterChip(
+          label:
+              'Price: €${filter.priceRange!.start.round()} - \$${filter.priceRange!.end.round()}',
+          onDeleted: () => filterNotifier.updatePriceRange(null, null),
         ),
       );
     }
@@ -88,12 +88,15 @@ class ActiveFilterChips extends ConsumerWidget {
       ),
     );
   }
+}
 
-  Widget _buildFilterChip(
-    BuildContext context,
-    String label,
-    VoidCallback onDeleted,
-  ) {
+class FilterChip extends StatelessWidget {
+  const FilterChip({super.key, required this.label, required this.onDeleted});
+  final String label;
+  final VoidCallback onDeleted;
+
+  @override
+  Widget build(BuildContext context) {
     return Chip(
       label: Text(label),
       onDeleted: onDeleted,
