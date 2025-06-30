@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
 
-@immutable
+@JsonSerializable()
 class GeoLocation {
   const GeoLocation({required this.lat, required this.long});
 
