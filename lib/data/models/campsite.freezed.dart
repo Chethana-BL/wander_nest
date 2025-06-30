@@ -29,6 +29,7 @@ mixin _$Campsite {
   List<String> get hostLanguages => throw _privateConstructorUsedError;
   double get pricePerNight => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
+  GeoLocation get geoLocation => throw _privateConstructorUsedError;
 
   /// Serializes this Campsite to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $CampsiteCopyWith<$Res> {
     List<String> hostLanguages,
     double pricePerNight,
     DateTime createdAt,
+    GeoLocation geoLocation,
   });
 }
 
@@ -80,6 +82,7 @@ class _$CampsiteCopyWithImpl<$Res, $Val extends Campsite>
     Object? hostLanguages = null,
     Object? pricePerNight = null,
     Object? createdAt = null,
+    Object? geoLocation = null,
   }) {
     return _then(
       _value.copyWith(
@@ -123,6 +126,11 @@ class _$CampsiteCopyWithImpl<$Res, $Val extends Campsite>
                     ? _value.createdAt
                     : createdAt // ignore: cast_nullable_to_non_nullable
                         as DateTime,
+            geoLocation:
+                null == geoLocation
+                    ? _value.geoLocation
+                    : geoLocation // ignore: cast_nullable_to_non_nullable
+                        as GeoLocation,
           )
           as $Val,
     );
@@ -147,6 +155,7 @@ abstract class _$$CampsiteImplCopyWith<$Res>
     List<String> hostLanguages,
     double pricePerNight,
     DateTime createdAt,
+    GeoLocation geoLocation,
   });
 }
 
@@ -172,6 +181,7 @@ class __$$CampsiteImplCopyWithImpl<$Res>
     Object? hostLanguages = null,
     Object? pricePerNight = null,
     Object? createdAt = null,
+    Object? geoLocation = null,
   }) {
     return _then(
       _$CampsiteImpl(
@@ -215,6 +225,11 @@ class __$$CampsiteImplCopyWithImpl<$Res>
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
                     as DateTime,
+        geoLocation:
+            null == geoLocation
+                ? _value.geoLocation
+                : geoLocation // ignore: cast_nullable_to_non_nullable
+                    as GeoLocation,
       ),
     );
   }
@@ -232,6 +247,7 @@ class _$CampsiteImpl extends _Campsite {
     required final List<String> hostLanguages,
     required this.pricePerNight,
     required this.createdAt,
+    required this.geoLocation,
   }) : _hostLanguages = hostLanguages,
        super._();
 
@@ -260,10 +276,12 @@ class _$CampsiteImpl extends _Campsite {
   final double pricePerNight;
   @override
   final DateTime createdAt;
+  @override
+  final GeoLocation geoLocation;
 
   @override
   String toString() {
-    return 'Campsite(id: $id, label: $label, photo: $photo, isCloseToWater: $isCloseToWater, isCampFireAllowed: $isCampFireAllowed, hostLanguages: $hostLanguages, pricePerNight: $pricePerNight, createdAt: $createdAt)';
+    return 'Campsite(id: $id, label: $label, photo: $photo, isCloseToWater: $isCloseToWater, isCampFireAllowed: $isCampFireAllowed, hostLanguages: $hostLanguages, pricePerNight: $pricePerNight, createdAt: $createdAt, geoLocation: $geoLocation)';
   }
 
   @override
@@ -285,7 +303,9 @@ class _$CampsiteImpl extends _Campsite {
             (identical(other.pricePerNight, pricePerNight) ||
                 other.pricePerNight == pricePerNight) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.geoLocation, geoLocation) ||
+                other.geoLocation == geoLocation));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -300,6 +320,7 @@ class _$CampsiteImpl extends _Campsite {
     const DeepCollectionEquality().hash(_hostLanguages),
     pricePerNight,
     createdAt,
+    geoLocation,
   );
 
   /// Create a copy of Campsite
@@ -326,6 +347,7 @@ abstract class _Campsite extends Campsite {
     required final List<String> hostLanguages,
     required final double pricePerNight,
     required final DateTime createdAt,
+    required final GeoLocation geoLocation,
   }) = _$CampsiteImpl;
   const _Campsite._() : super._();
 
@@ -348,6 +370,8 @@ abstract class _Campsite extends Campsite {
   double get pricePerNight;
   @override
   DateTime get createdAt;
+  @override
+  GeoLocation get geoLocation;
 
   /// Create a copy of Campsite
   /// with the given fields replaced by the non-null parameter values.

@@ -19,6 +19,9 @@ _$CampsiteImpl _$$CampsiteImplFromJson(Map<String, dynamic> json) =>
               .toList(),
       pricePerNight: (json['pricePerNight'] as num).toDouble(),
       createdAt: DateTime.parse(json['createdAt'] as String),
+      geoLocation: GeoLocation.fromJson(
+        json['geoLocation'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$$CampsiteImplToJson(_$CampsiteImpl instance) =>
@@ -31,4 +34,5 @@ Map<String, dynamic> _$$CampsiteImplToJson(_$CampsiteImpl instance) =>
       'hostLanguages': instance.hostLanguages,
       'pricePerNight': instance.pricePerNight,
       'createdAt': instance.createdAt.toIso8601String(),
+      'geoLocation': instance.geoLocation,
     };
