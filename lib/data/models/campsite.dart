@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wander_nest/data/models/geo_location.dart';
 
 part 'campsite.freezed.dart';
 part 'campsite.g.dart';
@@ -14,8 +15,7 @@ class Campsite with _$Campsite {
     required List<String> hostLanguages,
     required double pricePerNight,
     required DateTime createdAt,
-
-    /// TODO: geoLocation will be added later
+    required GeoLocation geoLocation,
   }) = _Campsite;
 
   const Campsite._();
