@@ -6,6 +6,7 @@ import 'package:wander_nest/presentation/screens/map_screen.dart';
 import 'package:wander_nest/presentation/widgets/filter_panel/filter_action_icon.dart';
 import 'package:wander_nest/presentation/widgets/filter_panel/filter_overlay_panel.dart';
 import 'package:wander_nest/presentation/widgets/home/app_error_message.dart';
+import 'package:wander_nest/presentation/widgets/home/app_tagline_banner.dart';
 import 'package:wander_nest/presentation/widgets/home/responsive_campsite_view.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -34,19 +35,27 @@ class HomeScreen extends ConsumerWidget {
             ),
         ],
       ),
-      body: campsiteListAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error:
-            (err, _) => AppErrorMessage(
-              message: 'Error: ${err.toString()}',
-              onRetry: () => ref.refresh(campsiteListProvider),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const AppTaglineBanner(),
+          Expanded(
+            child: campsiteListAsync.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error:
+                  (err, _) => AppErrorMessage(
+                    message: 'Error: ${err.toString()}',
+                    onRetry: () => ref.refresh(campsiteListProvider),
+                  ),
+              data: (allCampsites) {
+                return ResponsiveCampsiteView(
+                  campsites: allCampsites,
+                  filteredCampsites: filteredCampsites,
+                );
+              },
             ),
-        data: (allCampsites) {
-          return ResponsiveCampsiteView(
-            campsites: allCampsites,
-            filteredCampsites: filteredCampsites,
-          );
-        },
+          ),
+        ],
       ),
     );
   }

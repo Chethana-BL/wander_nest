@@ -27,35 +27,99 @@ class CampsiteDetailScreen extends StatelessWidget {
         builder: (context, constraints) {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(AppSizes.padding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _buildHeroImage(campsite),
-                const SizedBox(height: AppSizes.spaceLG),
-                CampsiteDetailMap(campsite: campsite),
-                const SizedBox(height: AppSizes.spaceLG),
-                // --- Price ---
-                Text(
-                  '€${campsite.pricePerNight.toStringAsFixed(2)} / night',
-                  style: theme.textTheme.headlineSmall?.copyWith(
-                    color: colors.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: AppSizes.spaceSM),
-                // --- Features ---
-                _buildFeatureBadges(campsite, customColors),
-                const SizedBox(height: AppSizes.spaceLG),
-                Text(
-                  'Enjoy scenic nature and outdoor adventures with our premium campsite "$campsiteName"',
-                  style: theme.textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isWide = constraints.maxWidth > 600;
+
+                if (isWide) {
+                  return Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1200),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Left side (image + map)
+                          Flexible(
+                            flex: 3,
+                            child: Column(
+                              children: [
+                                _buildHeroImage(campsite),
+                                const SizedBox(height: AppSizes.spaceLG),
+                                CampsiteDetailMap(campsite: campsite),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: AppSizes.space),
+                          // Right side (info)
+                          Flexible(
+                            flex: 2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _buildPrice(theme, colors),
+                                const SizedBox(height: AppSizes.spaceSM),
+                                _buildFeatureBadges(campsite, customColors),
+                                const SizedBox(height: AppSizes.spaceLG),
+                                _buildDescription(
+                                  theme,
+                                  campsiteName: campsiteName,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  // Fallback to vertical layout
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildHeroImage(campsite),
+                      const SizedBox(height: AppSizes.spaceLG),
+                      CampsiteDetailMap(campsite: campsite),
+                      const SizedBox(height: AppSizes.spaceLG),
+                      _buildPrice(theme, colors),
+                      const SizedBox(height: AppSizes.spaceSM),
+                      _buildFeatureBadges(campsite, customColors),
+                      const SizedBox(height: AppSizes.spaceLG),
+                      _buildDescription(
+                        theme,
+                        campsiteName: campsiteName,
+                        isWide: false,
+                      ),
+                    ],
+                  );
+                }
+              },
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget _buildPrice(ThemeData theme, ColorScheme colors) {
+    return Text(
+      '€${campsite.pricePerNight.toStringAsFixed(2)} / night',
+      style: theme.textTheme.headlineSmall?.copyWith(
+        color: colors.primary,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _buildDescription(
+    ThemeData theme, {
+    required String campsiteName,
+    bool isWide = true,
+  }) {
+    return Text(
+      'Enjoy scenic nature and outdoor adventures with our premium campsite "$campsiteName"',
+      style: theme.textTheme.bodyLarge,
+      textAlign: isWide ? TextAlign.start : TextAlign.center,
     );
   }
 

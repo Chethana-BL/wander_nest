@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/data/models/campsite.dart';
-import 'package:wander_nest/presentation/screens/campsite_detail_screen.dart';
+import 'package:wander_nest/presentation/navigation/campsite_navigation.dart';
 import 'package:wander_nest/presentation/widgets/common/campsite_feature_row.dart';
 import 'package:wander_nest/shared/extensions/string_extension.dart';
 
@@ -24,14 +24,7 @@ class CampsiteCard extends StatelessWidget {
           final cardWidth = constraints.maxWidth;
 
           return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => CampsiteDetailScreen(campsite: campsite),
-                ),
-              );
-            },
+            onTap: () => navigateToCampsiteDetail(context, campsite),
             borderRadius: BorderRadius.circular(AppSizes.radius),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
