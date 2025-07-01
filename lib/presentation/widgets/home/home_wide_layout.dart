@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/data/models/campsite.dart';
 import 'package:wander_nest/presentation/widgets/filter_panel/filter_sidebar_panel.dart';
@@ -54,18 +55,29 @@ class HomeWideLayout extends ConsumerWidget {
                   const Expanded(child: NoCampsiteFound())
                 else
                   Expanded(
-                    child: GridView.builder(
-                      itemCount: filteredCampsites.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        mainAxisSpacing: AppSizes.space,
-                        crossAxisSpacing: AppSizes.space,
-                        childAspectRatio: 0.95,
+                    child: AnimationLimiter(
+                      child: GridView.builder(
+                        itemCount: filteredCampsites.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          mainAxisSpacing: AppSizes.space,
+                          crossAxisSpacing: AppSizes.space,
+                          childAspectRatio: 0.95,
+                        ),
+                        itemBuilder: (context, index) {
+                          final campsite = filteredCampsites[index];
+                          return AnimationConfiguration.staggeredGrid(
+                            position: index,
+                            duration: const Duration(milliseconds: 500),
+                            columnCount: crossAxisCount,
+                            child: ScaleAnimation(
+                              child: FadeInAnimation(
+                                child: CampsiteCard(campsite: campsite),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      itemBuilder: (context, index) {
-                        final campsite = filteredCampsites[index];
-                        return CampsiteCard(campsite: campsite);
-                      },
                     ),
                   ),
               ],
