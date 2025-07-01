@@ -7,7 +7,6 @@ import 'package:wander_nest/application/providers/map/map_providers.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/data/models/map_cluster.dart';
 import 'package:wander_nest/presentation/navigation/campsite_navigation.dart';
-import 'package:wander_nest/presentation/screens/campsite_detail_screen.dart';
 import 'package:wander_nest/presentation/widgets/maps/campsite_cluster_preview_list.dart';
 import 'package:wander_nest/presentation/widgets/maps/campsite_marker_icon.dart';
 import 'package:wander_nest/presentation/widgets/maps/cluster_count_marker.dart';
