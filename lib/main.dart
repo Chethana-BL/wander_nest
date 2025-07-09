@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wander_nest/core/themes/app_theme.dart';
-import 'package:wander_nest/presentation/screens/home_screen.dart';
+import 'package:wander_nest/features/campsite/presentation/screens/home_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: CampingSiteApp()));

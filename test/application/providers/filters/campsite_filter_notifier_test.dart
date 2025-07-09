@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wander_nest/application/providers/filters/campsite_filter_model.dart';
-import 'package:wander_nest/application/providers/filters/campsite_filter_notifier.dart';
+import 'package:wander_nest/features/filters/domain/entities/campsite_filter_model.dart';
+import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';
 
 void main() {
   group('CampsiteFilterNotifier', () {

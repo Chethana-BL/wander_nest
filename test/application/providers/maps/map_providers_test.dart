@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:wander_nest/application/providers/filters/filtered_campsites_provider.dart';
-import 'package:wander_nest/application/providers/map/map_providers.dart';
-import 'package:wander_nest/application/providers/map/map_state.dart';
-import 'package:wander_nest/data/models/campsite.dart';
-import 'package:wander_nest/data/models/geo_location.dart';
-import 'package:wander_nest/data/models/map_cluster.dart';
+import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
+import 'package:wander_nest/features/maps/domain/entities/map_cluster.dart';
+import 'package:wander_nest/features/maps/presentation/providers/map_providers.dart';
+import 'package:wander_nest/features/maps/presentation/providers/map_state.dart';
+import 'package:wander_nest/shared/providers/filtered_campsites_provider.dart';
 
 final mockCampsite = Campsite(
   id: '1',

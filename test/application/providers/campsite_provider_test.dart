@@ -1,9 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:wander_nest/application/providers/campsite_provider.dart';
-import 'package:wander_nest/data/models/campsite.dart';
-import 'package:wander_nest/data/models/geo_location.dart';
+import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
+import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
+import 'package:wander_nest/features/filters/presentation/providers/price_range_provider.dart';
 
 import '../../mocks/mocks.mocks.dart';
 
