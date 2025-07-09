@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:wander_nest/data/datasources/remote/campsite_api_service.dart';
-import 'package:wander_nest/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/data/datasources/campsite_api_service.dart';
+import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 
 void main() {
   group('CampsiteApiService', () {

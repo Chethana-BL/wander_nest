@@ -6,9 +6,9 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:wander_nest/data/datasources/remote/campsite_api_service.dart'
+import 'package:wander_nest/features/campsite/data/datasources/campsite_api_service.dart'
     as _i2;
-import 'package:wander_nest/data/models/campsite.dart' as _i4;
+import 'package:wander_nest/features/campsite/data/models/campsite.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

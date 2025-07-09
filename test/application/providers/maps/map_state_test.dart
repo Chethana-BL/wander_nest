@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:wander_nest/application/providers/map/map_state.dart';
-import 'package:wander_nest/data/models/map_cluster.dart';
+import 'package:wander_nest/features/maps/domain/entities/map_cluster.dart';
+import 'package:wander_nest/features/maps/presentation/providers/map_state.dart';
 
 void main() {
   group('MapState', () {

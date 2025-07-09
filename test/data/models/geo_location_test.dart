@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wander_nest/data/models/geo_location.dart';
+import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
 
 void main() {
   group('GeoLocation', () {
