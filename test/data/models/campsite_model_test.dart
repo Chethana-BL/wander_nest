@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wander_nest/data/models/campsite.dart';
-import 'package:wander_nest/data/models/geo_location.dart';
+import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
 
 void main() {
   group('Campsite Model', () {

@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:wander_nest/data/models/campsite.dart';
-import 'package:wander_nest/data/models/geo_location.dart';
-import 'package:wander_nest/data/models/map_cluster.dart';
+import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
+import 'package:wander_nest/features/maps/domain/entities/map_cluster.dart';
 
 void main() {
   group('MapCluster', () {
