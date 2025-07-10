@@ -12,3 +12,16 @@ final priceRangeProvider = Provider<RangeValues>((ref) {
   final max = prices.reduce((a, b) => a > b ? a : b);
   return RangeValues(min, max);
 });
+
+final hostLanguagesProvider = Provider<List<String>>((ref) {
+  final campsites = ref.watch(sortedCampsiteListProvider);
+
+  final allLanguages =
+      campsites
+          .expand((c) => c.hostLanguages)
+          .toSet()
+          .map((lang) => lang.toUpperCase())
+          .toList()
+        ..sort();
+  return allLanguages;
+});

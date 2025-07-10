@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wander_nest/core/constants/app_icons.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
 import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';
 
 class FilterActionIcon extends ConsumerWidget {

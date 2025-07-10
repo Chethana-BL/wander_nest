@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_enums.dart';
 import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';
 
 /// [filteredCampsitesProvider] filters the list of campsites based on the current filter settings.
@@ -12,21 +13,28 @@ final filteredCampsitesProvider = Provider<List<Campsite>>((ref) {
 
   return sortedCampsites.where((c) {
     // Handle Close to Water true/false
-    if (filter.isCloseToWater != null &&
-        filter.isCloseToWater != c.isCloseToWater) {
+    // Water filter
+    if (filter.waterFilter == WaterFilter.nearWater && !c.isCloseToWater) {
+      return false;
+    }
+    if (filter.waterFilter == WaterFilter.noWater && c.isCloseToWater) {
       return false;
     }
 
-    // Handle Campfire Allowed true/false
-    if (filter.isCampFireAllowed != null &&
-        filter.isCampFireAllowed != c.isCampFireAllowed) {
+    // Campfire filter
+    if (filter.campfireFilter == CampfireFilter.allowed &&
+        !c.isCampFireAllowed) {
+      return false;
+    }
+    if (filter.campfireFilter == CampfireFilter.notAllowed &&
+        c.isCampFireAllowed) {
       return false;
     }
 
     // Host languages
-    if (filter.hostLanguages != null && filter.hostLanguages!.isNotEmpty) {
+    if (filter.hostLanguages.isNotEmpty) {
       if (!c.hostLanguages.any(
-        (lang) => filter.hostLanguages!
+        (lang) => filter.hostLanguages
             .map((f) => f.toLowerCase())
             .contains(lang.toLowerCase()),
       )) {
