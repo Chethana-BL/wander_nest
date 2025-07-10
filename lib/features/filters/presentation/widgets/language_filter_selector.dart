@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class LanguageFilterSelector extends StatefulWidget {
   const LanguageFilterSelector({
     super.key,
+    required this.allLanguages,
     required this.selectedLanguages,
     required this.onSelectionChanged,
   });
 
+  final List<String> allLanguages;
   final List<String> selectedLanguages;
   final ValueChanged<List<String>> onSelectionChanged;
 
@@ -16,7 +18,6 @@ class LanguageFilterSelector extends StatefulWidget {
 
 class _LanguageFilterSelectorState extends State<LanguageFilterSelector> {
   late List<String> _selectedLanguages;
-  final List<String> allLanguages = ['EN', 'DE'];
 
   @override
   void initState() {
@@ -53,7 +54,7 @@ class _LanguageFilterSelectorState extends State<LanguageFilterSelector> {
             });
           },
         ),
-        ...allLanguages.map((lang) {
+        ...widget.allLanguages.map((lang) {
           final isSelected = _selectedLanguages.contains(lang);
           return CheckboxListTile(
             value: isSelected,

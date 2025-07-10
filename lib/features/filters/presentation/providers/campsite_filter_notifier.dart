@@ -1,49 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wander_nest/features/filters/domain/entities/campsite_filter_model.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_enums.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
 
 /// [campsiteFilterProvider] is a StateNotifierProvider that provides an instance of [CampsiteFilterNotifier].
 final campsiteFilterProvider =
-    StateNotifierProvider<CampsiteFilterNotifier, CampsiteFilter>(
+    StateNotifierProvider<CampsiteFilterNotifier, FilterState>(
       (ref) => CampsiteFilterNotifier(),
     );
 
 /// [CampsiteFilterNotifier] is a StateNotifier that manages the state of campsite filters.
-class CampsiteFilterNotifier extends StateNotifier<CampsiteFilter> {
-  CampsiteFilterNotifier() : super(CampsiteFilter.empty);
+class CampsiteFilterNotifier extends StateNotifier<FilterState> {
+  CampsiteFilterNotifier() : super(FilterState.initial());
 
-  void toggleWaterFilter(bool? value) {
-    state = state.copyWith(
-      isCloseToWater: value,
-      resetCloseToWater: value == null,
-    );
+  void setWaterFilter(WaterFilter filter) {
+    state = state.copyWith(waterFilter: filter);
   }
 
-  void toggleCampfireFilter(bool? value) {
-    state = state.copyWith(
-      isCampFireAllowed: value,
-      resetCampFireAllowed: value == null,
-    );
+  void setCampfireFilter(CampfireFilter campfire) {
+    state = state.copyWith(campfireFilter: campfire);
   }
 
-  void updateHostLanguages(List<String>? languages) {
-    final isReset = languages == null || languages.isEmpty;
-    state = state.copyWith(
-      hostLanguages: languages,
-      resetHostLanguages: isReset,
-    );
+  void updateHostLanguages(List<String> languages) {
+    state = state.copyWith(hostLanguages: languages);
   }
 
-  void updatePriceRange(double? min, double? max) {
-    final range = (min != null && max != null) ? RangeValues(min, max) : null;
-    state = state.copyWith(priceRange: range, resetPriceRange: range == null);
+  void setPriceRange(RangeValues? range) {
+    state = state.copyWith(priceRange: range);
   }
 
-  void setFilter(CampsiteFilter filter) {
+  void setFilter(FilterState filter) {
     state = filter;
   }
 
   void resetFilters() {
-    state = CampsiteFilter.empty;
+    state = FilterState.initial();
   }
 }

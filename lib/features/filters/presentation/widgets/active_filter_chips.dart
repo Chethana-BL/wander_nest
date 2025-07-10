@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_enums.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
 import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';
-import 'package:wander_nest/features/filters/presentation/providers/price_range_provider.dart';
+import 'package:wander_nest/features/filters/presentation/providers/filter_options_providers.dart';
 import 'package:wander_nest/shared/extensions/color_extensions.dart';
 
 class ActiveFilterChips extends ConsumerWidget {
@@ -14,46 +16,46 @@ class ActiveFilterChips extends ConsumerWidget {
     final initialPriceRange = ref.watch(priceRangeProvider);
     final filterNotifier = ref.read(campsiteFilterProvider.notifier);
 
-    if (filter.isEmpty) {
+    if (filter.isDefault) {
       return const SizedBox.shrink();
     }
 
     final chips = <Widget>[];
 
-    if (filter.isCloseToWater != null) {
+    if (filter.waterFilter != WaterFilter.any) {
       chips.add(
         FilterChip(
           label:
-              filter.isCloseToWater == true
+              filter.waterFilter == WaterFilter.nearWater
                   ? 'Close to Water'
                   : 'Not Close to Water',
-          onDeleted: () => filterNotifier.toggleWaterFilter(null),
+          onDeleted: () => filterNotifier.setWaterFilter(WaterFilter.any),
         ),
       );
     }
 
-    if (filter.isCampFireAllowed != null) {
+    if (filter.campfireFilter != CampfireFilter.any) {
       chips.add(
         FilterChip(
           label:
-              filter.isCampFireAllowed == true
+              filter.campfireFilter == CampfireFilter.allowed
                   ? 'Campfire Allowed'
                   : 'Campfire Not Allowed',
-          onDeleted: () => filterNotifier.toggleCampfireFilter(null),
+          onDeleted: () => filterNotifier.setCampfireFilter(CampfireFilter.any),
         ),
       );
     }
 
-    if (filter.hostLanguages != null && filter.hostLanguages!.isNotEmpty) {
-      for (final lang in filter.hostLanguages!) {
+    if (filter.hostLanguages.isNotEmpty) {
+      for (final lang in filter.hostLanguages) {
         chips.add(
           FilterChip(
             label: lang,
             onDeleted: () {
-              final newList = List<String>.from(filter.hostLanguages!);
+              final newList = List<String>.from(filter.hostLanguages);
               newList.remove(lang);
               filterNotifier.updateHostLanguages(
-                newList.isEmpty ? null : newList,
+                newList.isNotEmpty ? newList : [],
               );
             },
           ),
@@ -66,7 +68,7 @@ class ActiveFilterChips extends ConsumerWidget {
         FilterChip(
           label:
               'Price: €${filter.priceRange!.start.round()} - \$${filter.priceRange!.end.round()}',
-          onDeleted: () => filterNotifier.updatePriceRange(null, null),
+          onDeleted: () => filterNotifier.setPriceRange(null),
         ),
       );
     }

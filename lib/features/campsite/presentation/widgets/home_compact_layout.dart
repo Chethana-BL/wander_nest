@@ -6,6 +6,7 @@ import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_card.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/home_empty_campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/result_summary_banner.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
 import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';
 import 'package:wander_nest/features/filters/presentation/widgets/active_filter_chips.dart';
 
@@ -48,7 +49,7 @@ class HomeCompactLayout extends ConsumerWidget {
 
     return Column(
       children: [
-        if (!filter.isEmpty)
+        if (!filter.isDefault)
           const Padding(
             padding: EdgeInsets.only(top: AppSizes.padding),
             child: ActiveFilterChips(),
