@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wander_nest/features/filters/domain/entities/campsite_filter_model.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_enums.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
 import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';
 
 void main() {
@@ -16,31 +17,35 @@ void main() {
 
     test('initial state is CampsiteFilter.empty', () {
       final filter = container.read(campsiteFilterProvider);
-      expect(filter, CampsiteFilter.empty);
+      expect(filter, FilterState.initial());
     });
 
     test('toggleWaterFilter sets isCloseToWater', () {
-      container.read(campsiteFilterProvider.notifier).toggleWaterFilter(true);
+      container
+          .read(campsiteFilterProvider.notifier)
+          .setWaterFilter(WaterFilter.nearWater);
       final filter = container.read(campsiteFilterProvider);
-      expect(filter.isCloseToWater, true);
+      expect(filter.waterFilter, WaterFilter.nearWater);
 
-      container.read(campsiteFilterProvider.notifier).toggleWaterFilter(null);
+      container
+          .read(campsiteFilterProvider.notifier)
+          .setWaterFilter(WaterFilter.any);
       final filter2 = container.read(campsiteFilterProvider);
-      expect(filter2.isCloseToWater, null);
+      expect(filter2.waterFilter, WaterFilter.any);
     });
 
     test('toggleCampfireFilter sets isCampFireAllowed', () {
       container
           .read(campsiteFilterProvider.notifier)
-          .toggleCampfireFilter(false);
+          .setCampfireFilter(CampfireFilter.notAllowed);
       final filter = container.read(campsiteFilterProvider);
-      expect(filter.isCampFireAllowed, false);
+      expect(filter.campfireFilter, CampfireFilter.notAllowed);
 
       container
           .read(campsiteFilterProvider.notifier)
-          .toggleCampfireFilter(null);
+          .setCampfireFilter(CampfireFilter.any);
       final filter2 = container.read(campsiteFilterProvider);
-      expect(filter2.isCampFireAllowed, null);
+      expect(filter2.campfireFilter, CampfireFilter.any);
     });
 
     test('updateHostLanguages sets hostLanguages', () {
@@ -53,27 +58,25 @@ void main() {
 
       container.read(campsiteFilterProvider.notifier).updateHostLanguages([]);
       final filter2 = container.read(campsiteFilterProvider);
-      expect(filter2.hostLanguages, null);
+      expect(filter2.hostLanguages, []);
     });
 
     test('updatePriceRange sets priceRange', () {
       container
           .read(campsiteFilterProvider.notifier)
-          .updatePriceRange(100, 500);
+          .setPriceRange(const RangeValues(100, 500));
       final filter = container.read(campsiteFilterProvider);
       expect(filter.priceRange, const RangeValues(100, 500));
 
-      container
-          .read(campsiteFilterProvider.notifier)
-          .updatePriceRange(null, null);
+      container.read(campsiteFilterProvider.notifier).setPriceRange(null);
       final filter2 = container.read(campsiteFilterProvider);
       expect(filter2.priceRange, null);
     });
 
     test('setFilter replaces state', () {
-      final newFilter = const CampsiteFilter(
-        isCloseToWater: true,
-        isCampFireAllowed: false,
+      final newFilter = const FilterState(
+        waterFilter: WaterFilter.nearWater,
+        campfireFilter: CampfireFilter.notAllowed,
         hostLanguages: ['es'],
         priceRange: RangeValues(200, 400),
       );
@@ -83,10 +86,12 @@ void main() {
     });
 
     test('resetFilters resets to empty', () {
-      container.read(campsiteFilterProvider.notifier).toggleWaterFilter(true);
+      container
+          .read(campsiteFilterProvider.notifier)
+          .setWaterFilter(WaterFilter.nearWater);
       container.read(campsiteFilterProvider.notifier).resetFilters();
       final filter = container.read(campsiteFilterProvider);
-      expect(filter, CampsiteFilter.empty);
+      expect(filter, FilterState.initial());
     });
   });
 }

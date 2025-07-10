@@ -4,7 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
 import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
-import 'package:wander_nest/features/filters/domain/entities/campsite_filter_model.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_enums.dart';
+import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
 import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';
 import 'package:wander_nest/shared/providers/filtered_campsites_provider.dart';
 
@@ -46,7 +47,7 @@ void main() {
   ];
 
   ProviderContainer makeContainer({
-    CampsiteFilter? filter,
+    FilterState? filter,
     List<Campsite>? campsites,
   }) {
     final container = ProviderContainer(
@@ -56,7 +57,7 @@ void main() {
         ),
         campsiteFilterProvider.overrideWith((ref) {
           final notifier = CampsiteFilterNotifier();
-          notifier.state = filter ?? const CampsiteFilter();
+          notifier.state = filter ?? const FilterState();
           return notifier;
         }),
       ],
@@ -73,7 +74,7 @@ void main() {
     });
 
     test('filters by isCloseToWater', () {
-      final filter = const CampsiteFilter(isCloseToWater: true);
+      final filter = const FilterState(waterFilter: WaterFilter.nearWater);
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
@@ -81,7 +82,9 @@ void main() {
     });
 
     test('filters by isCampFireAllowed', () {
-      final filter = const CampsiteFilter(isCampFireAllowed: false);
+      final filter = const FilterState(
+        campfireFilter: CampfireFilter.notAllowed,
+      );
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
@@ -89,7 +92,7 @@ void main() {
     });
 
     test('filters by hostLanguages', () {
-      final filter = const CampsiteFilter(hostLanguages: ['DE']);
+      final filter = const FilterState(hostLanguages: ['DE']);
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
@@ -97,7 +100,7 @@ void main() {
     });
 
     test('filters by priceRange', () {
-      final filter = const CampsiteFilter(priceRange: RangeValues(40, 60));
+      final filter = const FilterState(priceRange: RangeValues(40, 60));
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
@@ -105,9 +108,9 @@ void main() {
     });
 
     test('applies multiple filters together', () {
-      final filter = const CampsiteFilter(
-        isCloseToWater: false,
-        isCampFireAllowed: true,
+      final filter = const FilterState(
+        waterFilter: WaterFilter.noWater,
+        campfireFilter: CampfireFilter.allowed,
         hostLanguages: ['EN'],
         priceRange: RangeValues(70, 90),
       );
@@ -118,9 +121,9 @@ void main() {
     });
 
     test('returns empty list when no campsites match', () {
-      final filter = const CampsiteFilter(
-        isCloseToWater: true,
-        isCampFireAllowed: false,
+      final filter = const FilterState(
+        waterFilter: WaterFilter.nearWater,
+        campfireFilter: CampfireFilter.notAllowed,
       );
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
