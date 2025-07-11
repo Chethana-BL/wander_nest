@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
 import 'package:wander_nest/features/filters/domain/entities/filter_enums.dart';
 import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
@@ -13,35 +13,32 @@ void main() {
   final testCampsites = [
     Campsite(
       id: '1',
-      label: 'Alpha Camp',
+      name: 'Alpha Camp',
       isCloseToWater: true,
       isCampFireAllowed: true,
       hostLanguages: ['EN', 'DE'],
       pricePerNight: 50,
-      photo: 'photo1.jpg',
-      createdAt: DateTime(2023, 1, 1),
+      photoUrl: 'photo1.jpg',
       geoLocation: const GeoLocation(lat: 0.0, long: 0.0),
     ),
     Campsite(
       id: '2',
-      label: 'Delta Camp',
+      name: 'Delta Camp',
       isCloseToWater: false,
       isCampFireAllowed: false,
       hostLanguages: ['French'],
       pricePerNight: 30,
-      photo: 'photo2.jpg',
-      createdAt: DateTime(2023, 2, 1),
+      photoUrl: 'photo2.jpg',
       geoLocation: const GeoLocation(lat: 1.0, long: 1.0),
     ),
     Campsite(
       id: '3',
-      label: 'Beta Camp',
+      name: 'Beta Camp',
       isCloseToWater: false,
       isCampFireAllowed: true,
       hostLanguages: ['EN'],
       pricePerNight: 80,
-      photo: 'photo3.jpg',
-      createdAt: DateTime(2023, 3, 1),
+      photoUrl: 'photo3.jpg',
       geoLocation: const GeoLocation(lat: 2.0, long: 2.0),
     ),
   ];
@@ -78,7 +75,7 @@ void main() {
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
-      expect(result.first.label, 'Alpha Camp');
+      expect(result.first.name, 'Alpha Camp');
     });
 
     test('filters by isCampFireAllowed', () {
@@ -88,7 +85,7 @@ void main() {
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
-      expect(result.first.label, 'Delta Camp');
+      expect(result.first.name, 'Delta Camp');
     });
 
     test('filters by hostLanguages', () {
@@ -96,7 +93,7 @@ void main() {
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
-      expect(result.first.label, 'Alpha Camp');
+      expect(result.first.name, 'Alpha Camp');
     });
 
     test('filters by priceRange', () {
@@ -104,7 +101,7 @@ void main() {
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
-      expect(result.first.label, 'Alpha Camp');
+      expect(result.first.name, 'Alpha Camp');
     });
 
     test('applies multiple filters together', () {
@@ -117,7 +114,7 @@ void main() {
       final container = makeContainer(filter: filter);
       final result = container.read(filteredCampsitesProvider);
       expect(result.length, 1);
-      expect(result.first.label, 'Beta Camp');
+      expect(result.first.name, 'Beta Camp');
     });
 
     test('returns empty list when no campsites match', () {

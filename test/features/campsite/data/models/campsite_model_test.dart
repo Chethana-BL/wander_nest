@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/data/models/campsite_model.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
 
 void main() {
@@ -19,7 +19,7 @@ void main() {
     };
 
     test('fromJson returns valid Campsite object', () {
-      final campsite = Campsite.fromJson(mockJson);
+      final campsite = CampsiteModel.fromJson(mockJson);
 
       expect(campsite.id, '4321');
       expect(campsite.label, 'Forest Edge');
@@ -33,7 +33,7 @@ void main() {
       expect(campsite.geoLocation.long, mockGeoLocation.long);
     });
     test('toJson returns correct JSON map', () {
-      final campsite = Campsite.fromJson(mockJson);
+      final campsite = CampsiteModel.fromJson(mockJson);
       final json = campsite.toJson();
 
       expect(json['id'], '4321');

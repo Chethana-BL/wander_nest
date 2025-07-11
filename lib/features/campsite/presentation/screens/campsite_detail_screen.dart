@@ -3,10 +3,9 @@ import 'package:wander_nest/core/constants/app_icons.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/core/themes/app_custom_colors.dart';
 import 'package:wander_nest/core/widgets/buttons/primary_button.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_feature_badge.dart';
 import 'package:wander_nest/features/maps/presentation/widgets/campsite_detail_map.dart';
-import 'package:wander_nest/shared/extensions/string_extension.dart';
 
 class CampsiteDetailScreen extends StatelessWidget {
   const CampsiteDetailScreen({super.key, required this.campsite});
@@ -25,7 +24,7 @@ class CampsiteDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final campsiteName = campsite.label.capitalizeFirst();
+    final campsiteName = campsite.name;
 
     return Scaffold(
       appBar: AppBar(title: Text(campsiteName)),
@@ -55,7 +54,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 _CampsiteHeroImage(
-                                  imageUrl: campsite.photo.secureUrl(),
+                                  imageUrl: campsite.photoUrl,
                                   maxWidth: _maxMapWidth,
                                 ),
                                 const SizedBox(height: AppSizes.spaceLG),
@@ -92,7 +91,7 @@ class CampsiteDetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _CampsiteHeroImage(
-                        imageUrl: campsite.photo,
+                        imageUrl: campsite.photoUrl,
                         maxWidth: _maxMapWidth,
                       ),
                       const SizedBox(height: AppSizes.spaceLG),

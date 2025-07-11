@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
 
-part 'campsite.freezed.dart';
-part 'campsite.g.dart';
+part 'campsite_model.freezed.dart';
+part 'campsite_model.g.dart';
 
 @freezed
-class Campsite with _$Campsite {
-  const factory Campsite({
+class CampsiteModel with _$CampsiteModel {
+  const factory CampsiteModel({
     required String id,
     required String label,
     required String photo,
@@ -16,10 +16,8 @@ class Campsite with _$Campsite {
     required double pricePerNight,
     required DateTime createdAt,
     required GeoLocation geoLocation,
-  }) = _Campsite;
+  }) = _CampsiteModel;
 
-  const Campsite._();
-
-  factory Campsite.fromJson(Map<String, dynamic> json) =>
-      _$CampsiteFromJson(json);
+  factory CampsiteModel.fromJson(Map<String, dynamic> json) =>
+      _$CampsiteModelFromJson(json);
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/maps/presentation/providers/map_controller_notifier.dart';
 
 void main() {
@@ -14,13 +14,12 @@ void main() {
     }) {
       return Campsite(
         id: id,
-        label: 'Alpha Camp',
-        photo: 'https://example.com/photo.jpg',
+        name: 'Alpha Camp',
+        photoUrl: 'https://example.com/photo.jpg',
         isCloseToWater: false,
         isCampFireAllowed: true,
         hostLanguages: ['EN'],
         pricePerNight: 50.0,
-        createdAt: DateTime(2023, 1, 1),
         geoLocation: GeoLocation(lat: lat, long: lng),
       );
     }

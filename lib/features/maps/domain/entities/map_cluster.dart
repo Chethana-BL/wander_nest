@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 
 part 'map_cluster.freezed.dart';
 
