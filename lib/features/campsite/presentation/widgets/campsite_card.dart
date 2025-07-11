@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/navigation/campsite_routes.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_feature_row.dart';
-import 'package:wander_nest/shared/extensions/string_extension.dart';
 
 class CampsiteCard extends StatelessWidget {
   const CampsiteCard({super.key, required this.campsite});
@@ -34,7 +33,7 @@ class CampsiteCard extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 16 / 9,
                   child: Image.network(
-                    campsite.photo.secureUrl(),
+                    campsite.photoUrl,
                     fit: BoxFit.cover,
                     errorBuilder:
                         (context, error, stackTrace) => const Center(
@@ -50,7 +49,7 @@ class CampsiteCard extends StatelessWidget {
                     children: [
                       // Title
                       Text(
-                        campsite.label.capitalizeFirst(),
+                        campsite.name,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.onSurface,

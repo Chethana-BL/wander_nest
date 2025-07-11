@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/maps/domain/entities/map_cluster.dart';
 import 'package:wander_nest/features/maps/presentation/providers/map_providers.dart';
 import 'package:wander_nest/features/maps/presentation/providers/map_state.dart';
@@ -10,13 +10,12 @@ import 'package:wander_nest/shared/providers/filtered_campsites_provider.dart';
 
 final mockCampsite = Campsite(
   id: '1',
-  label: 'Alpha Camp',
-  photo: 'https://example.com/photo.jpg',
+  name: 'Alpha Camp',
+  photoUrl: 'https://example.com/photo.jpg',
   isCloseToWater: true,
   isCampFireAllowed: true,
   hostLanguages: ['English'],
   pricePerNight: 20.0,
-  createdAt: DateTime(2023, 1, 1),
   geoLocation: const GeoLocation(lat: 0.0, long: 0.0),
 );
 

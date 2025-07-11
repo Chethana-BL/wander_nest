@@ -3,13 +3,19 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:wander_nest/features/campsite/data/datasources/campsite_api_service.dart'
+import 'package:mockito/src/dummies.dart' as _i4;
+import 'package:wander_nest/features/campsite/data/datasources/campsite_remote_data_source.dart'
     as _i3;
-import 'package:wander_nest/features/campsite/data/models/campsite.dart' as _i5;
+import 'package:wander_nest/features/campsite/data/models/campsite_model.dart'
+    as _i6;
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart'
+    as _i8;
+import 'package:wander_nest/features/campsite/domain/repositories/campsite_repository.dart'
+    as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -30,12 +36,12 @@ class _FakeClient_0 extends _i1.SmartFake implements _i2.Client {
     : super(parent, parentInvocation);
 }
 
-/// A class which mocks [CampsiteApiService].
+/// A class which mocks [CampsiteRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCampsiteApiService extends _i1.Mock
-    implements _i3.CampsiteApiService {
-  MockCampsiteApiService() {
+class MockCampsiteRemoteDataSource extends _i1.Mock
+    implements _i3.CampsiteRemoteDataSource {
+  MockCampsiteRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -48,10 +54,41 @@ class MockCampsiteApiService extends _i1.Mock
           as _i2.Client);
 
   @override
-  _i4.Future<List<_i5.Campsite>> fetchCampsites() =>
+  String get baseUrl =>
+      (super.noSuchMethod(
+            Invocation.getter(#baseUrl),
+            returnValue: _i4.dummyValue<String>(
+              this,
+              Invocation.getter(#baseUrl),
+            ),
+          )
+          as String);
+
+  @override
+  _i5.Future<List<_i6.CampsiteModel>> fetchCampsites() =>
       (super.noSuchMethod(
             Invocation.method(#fetchCampsites, []),
-            returnValue: _i4.Future<List<_i5.Campsite>>.value(<_i5.Campsite>[]),
+            returnValue: _i5.Future<List<_i6.CampsiteModel>>.value(
+              <_i6.CampsiteModel>[],
+            ),
           )
-          as _i4.Future<List<_i5.Campsite>>);
+          as _i5.Future<List<_i6.CampsiteModel>>);
+}
+
+/// A class which mocks [CampsiteRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCampsiteRepository extends _i1.Mock
+    implements _i7.CampsiteRepository {
+  MockCampsiteRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<List<_i8.Campsite>> fetchCampsites() =>
+      (super.noSuchMethod(
+            Invocation.method(#fetchCampsites, []),
+            returnValue: _i5.Future<List<_i8.Campsite>>.value(<_i8.Campsite>[]),
+          )
+          as _i5.Future<List<_i8.Campsite>>);
 }

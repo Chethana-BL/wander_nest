@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'campsite.dart';
+part of 'campsite_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,12 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-Campsite _$CampsiteFromJson(Map<String, dynamic> json) {
-  return _Campsite.fromJson(json);
+CampsiteModel _$CampsiteModelFromJson(Map<String, dynamic> json) {
+  return _CampsiteModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Campsite {
+mixin _$CampsiteModel {
   String get id => throw _privateConstructorUsedError;
   String get label => throw _privateConstructorUsedError;
   String get photo => throw _privateConstructorUsedError;
@@ -31,20 +31,22 @@ mixin _$Campsite {
   DateTime get createdAt => throw _privateConstructorUsedError;
   GeoLocation get geoLocation => throw _privateConstructorUsedError;
 
-  /// Serializes this Campsite to a JSON map.
+  /// Serializes this CampsiteModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of Campsite
+  /// Create a copy of CampsiteModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CampsiteCopyWith<Campsite> get copyWith =>
+  $CampsiteModelCopyWith<CampsiteModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CampsiteCopyWith<$Res> {
-  factory $CampsiteCopyWith(Campsite value, $Res Function(Campsite) then) =
-      _$CampsiteCopyWithImpl<$Res, Campsite>;
+abstract class $CampsiteModelCopyWith<$Res> {
+  factory $CampsiteModelCopyWith(
+    CampsiteModel value,
+    $Res Function(CampsiteModel) then,
+  ) = _$CampsiteModelCopyWithImpl<$Res, CampsiteModel>;
   @useResult
   $Res call({
     String id,
@@ -60,16 +62,16 @@ abstract class $CampsiteCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CampsiteCopyWithImpl<$Res, $Val extends Campsite>
-    implements $CampsiteCopyWith<$Res> {
-  _$CampsiteCopyWithImpl(this._value, this._then);
+class _$CampsiteModelCopyWithImpl<$Res, $Val extends CampsiteModel>
+    implements $CampsiteModelCopyWith<$Res> {
+  _$CampsiteModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Campsite
+  /// Create a copy of CampsiteModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -138,12 +140,12 @@ class _$CampsiteCopyWithImpl<$Res, $Val extends Campsite>
 }
 
 /// @nodoc
-abstract class _$$CampsiteImplCopyWith<$Res>
-    implements $CampsiteCopyWith<$Res> {
-  factory _$$CampsiteImplCopyWith(
-    _$CampsiteImpl value,
-    $Res Function(_$CampsiteImpl) then,
-  ) = __$$CampsiteImplCopyWithImpl<$Res>;
+abstract class _$$CampsiteModelImplCopyWith<$Res>
+    implements $CampsiteModelCopyWith<$Res> {
+  factory _$$CampsiteModelImplCopyWith(
+    _$CampsiteModelImpl value,
+    $Res Function(_$CampsiteModelImpl) then,
+  ) = __$$CampsiteModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({
@@ -160,15 +162,15 @@ abstract class _$$CampsiteImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$CampsiteImplCopyWithImpl<$Res>
-    extends _$CampsiteCopyWithImpl<$Res, _$CampsiteImpl>
-    implements _$$CampsiteImplCopyWith<$Res> {
-  __$$CampsiteImplCopyWithImpl(
-    _$CampsiteImpl _value,
-    $Res Function(_$CampsiteImpl) _then,
+class __$$CampsiteModelImplCopyWithImpl<$Res>
+    extends _$CampsiteModelCopyWithImpl<$Res, _$CampsiteModelImpl>
+    implements _$$CampsiteModelImplCopyWith<$Res> {
+  __$$CampsiteModelImplCopyWithImpl(
+    _$CampsiteModelImpl _value,
+    $Res Function(_$CampsiteModelImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of Campsite
+  /// Create a copy of CampsiteModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -184,7 +186,7 @@ class __$$CampsiteImplCopyWithImpl<$Res>
     Object? geoLocation = null,
   }) {
     return _then(
-      _$CampsiteImpl(
+      _$CampsiteModelImpl(
         id:
             null == id
                 ? _value.id
@@ -237,8 +239,8 @@ class __$$CampsiteImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CampsiteImpl extends _Campsite {
-  const _$CampsiteImpl({
+class _$CampsiteModelImpl implements _CampsiteModel {
+  const _$CampsiteModelImpl({
     required this.id,
     required this.label,
     required this.photo,
@@ -248,11 +250,10 @@ class _$CampsiteImpl extends _Campsite {
     required this.pricePerNight,
     required this.createdAt,
     required this.geoLocation,
-  }) : _hostLanguages = hostLanguages,
-       super._();
+  }) : _hostLanguages = hostLanguages;
 
-  factory _$CampsiteImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CampsiteImplFromJson(json);
+  factory _$CampsiteModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CampsiteModelImplFromJson(json);
 
   @override
   final String id;
@@ -281,14 +282,14 @@ class _$CampsiteImpl extends _Campsite {
 
   @override
   String toString() {
-    return 'Campsite(id: $id, label: $label, photo: $photo, isCloseToWater: $isCloseToWater, isCampFireAllowed: $isCampFireAllowed, hostLanguages: $hostLanguages, pricePerNight: $pricePerNight, createdAt: $createdAt, geoLocation: $geoLocation)';
+    return 'CampsiteModel(id: $id, label: $label, photo: $photo, isCloseToWater: $isCloseToWater, isCampFireAllowed: $isCampFireAllowed, hostLanguages: $hostLanguages, pricePerNight: $pricePerNight, createdAt: $createdAt, geoLocation: $geoLocation)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CampsiteImpl &&
+            other is _$CampsiteModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.photo, photo) || other.photo == photo) &&
@@ -323,22 +324,22 @@ class _$CampsiteImpl extends _Campsite {
     geoLocation,
   );
 
-  /// Create a copy of Campsite
+  /// Create a copy of CampsiteModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CampsiteImplCopyWith<_$CampsiteImpl> get copyWith =>
-      __$$CampsiteImplCopyWithImpl<_$CampsiteImpl>(this, _$identity);
+  _$$CampsiteModelImplCopyWith<_$CampsiteModelImpl> get copyWith =>
+      __$$CampsiteModelImplCopyWithImpl<_$CampsiteModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CampsiteImplToJson(this);
+    return _$$CampsiteModelImplToJson(this);
   }
 }
 
-abstract class _Campsite extends Campsite {
-  const factory _Campsite({
+abstract class _CampsiteModel implements CampsiteModel {
+  const factory _CampsiteModel({
     required final String id,
     required final String label,
     required final String photo,
@@ -348,11 +349,10 @@ abstract class _Campsite extends Campsite {
     required final double pricePerNight,
     required final DateTime createdAt,
     required final GeoLocation geoLocation,
-  }) = _$CampsiteImpl;
-  const _Campsite._() : super._();
+  }) = _$CampsiteModelImpl;
 
-  factory _Campsite.fromJson(Map<String, dynamic> json) =
-      _$CampsiteImpl.fromJson;
+  factory _CampsiteModel.fromJson(Map<String, dynamic> json) =
+      _$CampsiteModelImpl.fromJson;
 
   @override
   String get id;
@@ -373,10 +373,10 @@ abstract class _Campsite extends Campsite {
   @override
   GeoLocation get geoLocation;
 
-  /// Create a copy of Campsite
+  /// Create a copy of CampsiteModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CampsiteImplCopyWith<_$CampsiteImpl> get copyWith =>
+  _$$CampsiteModelImplCopyWith<_$CampsiteModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
