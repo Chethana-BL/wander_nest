@@ -14,13 +14,25 @@ class CampsiteDetailScreen extends StatelessWidget {
 
   static const double _maxMapWidth = 600;
 
+  void _handleBookNowAction(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Booking not implemented yet'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final campsiteName = campsite.label.capitalizeFirst();
 
     return Scaffold(
       appBar: AppBar(title: Text(campsiteName)),
-      bottomNavigationBar: const _BookNowButton(),
+      bottomNavigationBar: PrimaryButton(
+        label: 'Book Now',
+        onPressed: () => _handleBookNowAction,
+      ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -108,25 +120,6 @@ class CampsiteDetailScreen extends StatelessWidget {
 
 // Note: Below widges are currently local to this file for cohesion.
 // Can be extracted into its own file later if reused elsewhere.
-
-class _BookNowButton extends StatelessWidget {
-  const _BookNowButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return PrimaryButton(
-      label: 'Book Now',
-      onPressed: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Booking not implemented yet'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      },
-    );
-  }
-}
 
 class _CampsiteHeroImage extends StatelessWidget {
   const _CampsiteHeroImage({required this.imageUrl, required this.maxWidth});
