@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:wander_nest/core/constants/app_icons.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/core/themes/app_custom_colors.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/navigation/campsite_routes.dart';
 import 'package:wander_nest/shared/extensions/color_extensions.dart';
-import 'package:wander_nest/shared/extensions/string_extension.dart';
 
 class CampsiteClusterPreviewList extends StatelessWidget {
   const CampsiteClusterPreviewList({super.key, required this.campsites});
@@ -57,7 +56,7 @@ class CampsiteClusterPreviewList extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(AppSizes.radiusSM),
                       child: Image.network(
-                        campsite.photo.secureUrl(),
+                        campsite.photoUrl,
                         width: AppSizes.iconXXL,
                         height: AppSizes.iconXXL,
                         fit: BoxFit.cover,
@@ -75,7 +74,7 @@ class CampsiteClusterPreviewList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            campsite.label.capitalizeFirst(),
+                            campsite.name,
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),

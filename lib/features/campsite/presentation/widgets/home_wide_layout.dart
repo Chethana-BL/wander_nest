@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_card.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/home_empty_campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/result_summary_banner.dart';

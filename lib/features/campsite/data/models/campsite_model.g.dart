@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'campsite.dart';
+part of 'campsite_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CampsiteImpl _$$CampsiteImplFromJson(Map<String, dynamic> json) =>
-    _$CampsiteImpl(
+_$CampsiteModelImpl _$$CampsiteModelImplFromJson(Map<String, dynamic> json) =>
+    _$CampsiteModelImpl(
       id: json['id'] as String,
       label: json['label'] as String,
       photo: json['photo'] as String,
@@ -24,7 +24,7 @@ _$CampsiteImpl _$$CampsiteImplFromJson(Map<String, dynamic> json) =>
       ),
     );
 
-Map<String, dynamic> _$$CampsiteImplToJson(_$CampsiteImpl instance) =>
+Map<String, dynamic> _$$CampsiteModelImplToJson(_$CampsiteModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'label': instance.label,

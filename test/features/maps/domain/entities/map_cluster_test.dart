@@ -1,32 +1,29 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
+import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/maps/domain/entities/map_cluster.dart';
 
 void main() {
   group('MapCluster', () {
     final campsite1 = Campsite(
       id: '1',
-      label: 'Alpha Camp',
-      photo: 'photo1.jpg',
+      name: 'Alpha Camp',
+      photoUrl: 'photo1.jpg',
       isCloseToWater: true,
       isCampFireAllowed: true,
       hostLanguages: ['English'],
       pricePerNight: 50.0,
-      createdAt: DateTime(2023, 1, 1),
       geoLocation: const GeoLocation(lat: 10.0, long: 20.0),
     );
     final campsite2 = Campsite(
       id: '2',
-
-      label: 'Beta Camp',
-      photo: 'photo2.jpg',
+      name: 'Beta Camp',
+      photoUrl: 'photo2.jpg',
       isCloseToWater: false,
       isCampFireAllowed: false,
       hostLanguages: ['Spanish'],
       pricePerNight: 60.0,
-      createdAt: DateTime(2023, 2, 2),
       geoLocation: const GeoLocation(lat: 11.0, long: 21.0),
     );
 
