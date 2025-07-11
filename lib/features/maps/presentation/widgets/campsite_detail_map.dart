@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/maps/presentation/widgets/campsite_marker_icon.dart';
@@ -27,6 +29,10 @@ class CampsiteDetailMap extends StatelessWidget {
               ),
               children: [
                 TileLayer(
+                  tileProvider:
+                      kIsWeb
+                          ? CancellableNetworkTileProvider()
+                          : NetworkTileProvider(),
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   userAgentPackageName: 'com.example.wanderNest',
                 ),

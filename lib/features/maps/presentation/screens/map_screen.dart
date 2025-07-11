@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
@@ -21,6 +23,7 @@ class MapScreen extends ConsumerStatefulWidget {
 class _MapScreenState extends ConsumerState<MapScreen> {
   late final MapController _mapController;
   bool _hasMovedToInitialCenter = false;
+  bool _initialClusterSetupDone = false;
 
   @override
   void initState() {
@@ -32,28 +35,43 @@ class _MapScreenState extends ConsumerState<MapScreen> {
   Widget build(BuildContext context) {
     final mapState = ref.watch(mapControllerProvider);
     final clustersAsync = ref.watch(mapClustersProvider);
+    final campsites = ref.read(filteredCampsitesProvider);
 
-    // Use a fallback center if null
-    final center =
-        mapState.center ?? const LatLng(37.7749, -122.4194); // San Francisco
+    final mapStateCenter = mapState.center;
+    final currentZoom = mapState.currentZoom;
+
+    // Use a fallback center if null: San Francisco
+    final currentCenter = mapStateCenter ?? const LatLng(37.7749, -122.4194);
+
+    if (!_initialClusterSetupDone || !_hasMovedToInitialCenter) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+
+        // Move to initial center only once
+        if (!_hasMovedToInitialCenter && mapStateCenter != null) {
+          _mapController.move(mapStateCenter, currentZoom);
+          _hasMovedToInitialCenter = true;
+        }
+
+        // Initialize clusters only once
+        if (!_initialClusterSetupDone) {
+          ref
+              .read(mapControllerProvider.notifier)
+              .updateClusters(campsites, currentZoom);
+          _initialClusterSetupDone = true;
+        }
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(title: const Text('Campsites Map')),
       body: clustersAsync.when(
         data: (clusters) {
-          if (!_hasMovedToInitialCenter && mapState.center != null) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (!mounted) return;
-              _mapController.move(mapState.center!, mapState.currentZoom);
-              _hasMovedToInitialCenter = true;
-            });
-          }
-
           return FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              initialCenter: center,
-              initialZoom: mapState.currentZoom,
+              initialCenter: currentCenter,
+              initialZoom: currentZoom,
               maxZoom: 18,
               minZoom: 3,
               onPositionChanged: (position, hasGesture) {
@@ -62,6 +80,10 @@ class _MapScreenState extends ConsumerState<MapScreen> {
             ),
             children: [
               TileLayer(
+                tileProvider:
+                    kIsWeb
+                        ? CancellableNetworkTileProvider()
+                        : NetworkTileProvider(),
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 userAgentPackageName: 'com.example.wanderNest',
                 maxZoom: 18,
