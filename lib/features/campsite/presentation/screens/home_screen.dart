@@ -12,6 +12,25 @@ import 'package:wander_nest/shared/providers/filtered_campsites_provider.dart';
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
+  void _handleMapIconPressed(
+    BuildContext context, {
+    required bool isCampsitesEmpty,
+  }) {
+    if (isCampsitesEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('No campsites to display on the map'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const MapScreen()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final campsiteListAsync = ref.watch(campsiteListProvider);
@@ -22,7 +41,16 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Wander Nest'),
         actions: [
-          _buildMapIconButton(context, filteredCampsites.isEmpty),
+          // View Map
+          IconButton(
+            icon: const Icon(Icons.map),
+            onPressed: () {
+              _handleMapIconPressed(
+                context,
+                isCampsitesEmpty: filteredCampsites.isEmpty,
+              );
+            },
+          ),
           if (isCompact)
             /// Compact view: Show filter icon with badge
             FilterActionIcon(
@@ -57,27 +85,6 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildMapIconButton(BuildContext context, bool isCampsitesEmpty) {
-    return IconButton(
-      icon: const Icon(Icons.map),
-      onPressed: () {
-        if (isCampsitesEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('No campsites to display on map'),
-              duration: Duration(seconds: 2),
-            ),
-          );
-          return;
-        }
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const MapScreen()),
-        );
-      },
     );
   }
 }

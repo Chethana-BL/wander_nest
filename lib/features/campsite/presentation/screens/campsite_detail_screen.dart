@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wander_nest/core/constants/app_icons.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/core/themes/app_custom_colors.dart';
+import 'package:wander_nest/core/widgets/buttons/primary_button.dart';
 import 'package:wander_nest/features/campsite/data/models/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_feature_badge.dart';
 import 'package:wander_nest/features/maps/presentation/widgets/campsite_detail_map.dart';
@@ -15,14 +16,11 @@ class CampsiteDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
-    final customColors = Theme.of(context).extension<AppCustomColors>()!;
     final campsiteName = campsite.label.capitalizeFirst();
 
     return Scaffold(
       appBar: AppBar(title: Text(campsiteName)),
-      bottomNavigationBar: _buildBookNowButton(context, colors),
+      bottomNavigationBar: const _BookNowButton(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -44,7 +42,10 @@ class CampsiteDetailScreen extends StatelessWidget {
                             flex: 3,
                             child: Column(
                               children: [
-                                _buildHeroImage(campsite),
+                                _CampsiteHeroImage(
+                                  imageUrl: campsite.photo.secureUrl(),
+                                  maxWidth: _maxMapWidth,
+                                ),
                                 const SizedBox(height: AppSizes.spaceLG),
                                 CampsiteDetailMap(campsite: campsite),
                               ],
@@ -57,12 +58,13 @@ class CampsiteDetailScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                _buildPrice(theme, colors),
+                                _CampsitePriceText(
+                                  pricePerNight: campsite.pricePerNight,
+                                ),
                                 const SizedBox(height: AppSizes.spaceSM),
-                                _buildFeatureBadges(campsite, customColors),
+                                _CampsiteFeatureBadges(campsite: campsite),
                                 const SizedBox(height: AppSizes.spaceLG),
-                                _buildDescription(
-                                  theme,
+                                _CampsiteDescriptionText(
                                   campsiteName: campsiteName,
                                 ),
                               ],
@@ -77,16 +79,18 @@ class CampsiteDetailScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      _buildHeroImage(campsite),
+                      _CampsiteHeroImage(
+                        imageUrl: campsite.photo,
+                        maxWidth: _maxMapWidth,
+                      ),
                       const SizedBox(height: AppSizes.spaceLG),
                       CampsiteDetailMap(campsite: campsite),
                       const SizedBox(height: AppSizes.spaceLG),
-                      _buildPrice(theme, colors),
+                      _CampsitePriceText(pricePerNight: campsite.pricePerNight),
                       const SizedBox(height: AppSizes.spaceSM),
-                      _buildFeatureBadges(campsite, customColors),
+                      _CampsiteFeatureBadges(campsite: campsite),
                       const SizedBox(height: AppSizes.spaceLG),
-                      _buildDescription(
-                        theme,
+                      _CampsiteDescriptionText(
                         campsiteName: campsiteName,
                         isWide: false,
                       ),
@@ -100,69 +104,45 @@ class CampsiteDetailScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildPrice(ThemeData theme, ColorScheme colors) {
-    return Text(
-      '€${campsite.pricePerNight.toStringAsFixed(2)} / night',
-      style: theme.textTheme.headlineSmall?.copyWith(
-        color: colors.primary,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
+// Note: Below widges are currently local to this file for cohesion.
+// Can be extracted into its own file later if reused elsewhere.
 
-  Widget _buildDescription(
-    ThemeData theme, {
-    required String campsiteName,
-    bool isWide = true,
-  }) {
-    return Text(
-      'Enjoy scenic nature and outdoor adventures with our premium campsite "$campsiteName"',
-      style: theme.textTheme.bodyLarge,
-      textAlign: isWide ? TextAlign.start : TextAlign.center,
-    );
-  }
+class _BookNowButton extends StatelessWidget {
+  const _BookNowButton();
 
-  Widget _buildBookNowButton(BuildContext context, ColorScheme colors) {
-    return SafeArea(
-      minimum: const EdgeInsets.all(AppSizes.padding),
-      child: SizedBox(
-        height: AppSizes.buttonHeight,
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: () {
-            // Handle booking action
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Booking not implemented yet'),
-                duration: Duration(seconds: 2),
-              ),
-            );
-          },
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizes.padding),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSizes.radius),
-            ),
-            backgroundColor: colors.primary,
-            foregroundColor: colors.onPrimary,
-            textStyle: Theme.of(context).textTheme.titleMedium,
+  @override
+  Widget build(BuildContext context) {
+    return PrimaryButton(
+      label: 'Book Now',
+      onPressed: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Booking not implemented yet'),
+            duration: Duration(seconds: 2),
           ),
-          child: const Text('Book Now'),
-        ),
-      ),
+        );
+      },
     );
   }
+}
 
-  Widget _buildHeroImage(Campsite campsite) {
+class _CampsiteHeroImage extends StatelessWidget {
+  const _CampsiteHeroImage({required this.imageUrl, required this.maxWidth});
+  final String imageUrl;
+  final double maxWidth;
+
+  @override
+  Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: _maxMapWidth),
+      constraints: BoxConstraints(maxWidth: maxWidth),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppSizes.radius),
         child: AspectRatio(
           aspectRatio: 16 / 9,
           child: Image.network(
-            campsite.photo.secureUrl(),
+            imageUrl,
             width: double.infinity,
             fit: BoxFit.cover,
             errorBuilder:
@@ -173,8 +153,54 @@ class CampsiteDetailScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildFeatureBadges(Campsite campsite, AppCustomColors customColors) {
+class _CampsitePriceText extends StatelessWidget {
+  const _CampsitePriceText({required this.pricePerNight});
+  final double pricePerNight;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
+    return Text(
+      '€${pricePerNight.toStringAsFixed(2)} / night',
+      style: theme.textTheme.headlineSmall?.copyWith(
+        color: colors.primary,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+}
+
+class _CampsiteDescriptionText extends StatelessWidget {
+  const _CampsiteDescriptionText({
+    required this.campsiteName,
+    this.isWide = true,
+  });
+  final String campsiteName;
+  final bool isWide;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Text(
+      'Enjoy scenic nature and outdoor adventures with our premium campsite "$campsiteName"',
+      style: theme.textTheme.bodyLarge,
+      textAlign: isWide ? TextAlign.start : TextAlign.center,
+    );
+  }
+}
+
+class _CampsiteFeatureBadges extends StatelessWidget {
+  const _CampsiteFeatureBadges({required this.campsite});
+  final Campsite campsite;
+
+  @override
+  Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<AppCustomColors>()!;
+
     return Wrap(
       spacing: AppSizes.spaceSM,
       runSpacing: AppSizes.spaceSM,
