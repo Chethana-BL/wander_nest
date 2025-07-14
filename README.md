@@ -39,6 +39,7 @@ This app is a demonstration project built to showcase features and coding practi
 ## 🏗 Architecture Overview
 
 The app uses a modular, scalable architecture with Riverpod for state management, ensuring a clean separation of concerns and easy testability.
+🔍 **See [ARCHITECTURE.md](ARCHITECTURE.md)** for detailed insights into the app’s structure and data flow.
 
 ---
 
@@ -46,22 +47,21 @@ The app uses a modular, scalable architecture with Riverpod for state management
 
 ```
 lib/
-├── core/
-│ ├── themes/
-│ └── constants/
-├── data/
-│ ├── models/
-│ └── datasources/remote/
-├── application/
-│ └── campsite/
-│ └── providers/
-├── presentation/
-│ ├── screens/
-│ └── widgets/
-├── shared/
-│ └── extensions/
-└── main.dart
+├── core/               # Shared app-level configs, themes, widgets
+├── features/           # Feature-first structure (campsite, filters, maps)
+├── shared/             # Cross-feature utilities: extensions, providers
+└── main.dart           # App entry point
 ```
+
+👉 See full breakdown in [`ARCHITECTURE.md`](ARCHITECTURE.md)
+
+---
+
+## 📂 Branching
+
+For details on branch naming conventions and workflow, see the [branching strategy](BRANCHING.md).  
+Following this helps keep development organized and easy to manage.
+
 ---
 
 ## ⚙️ Setup Instructions
