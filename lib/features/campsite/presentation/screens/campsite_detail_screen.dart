@@ -30,7 +30,7 @@ class CampsiteDetailScreen extends StatelessWidget {
       appBar: AppBar(title: Text(campsiteName)),
       bottomNavigationBar: PrimaryButton(
         label: 'Book Now',
-        onPressed: () => _handleBookNowAction,
+        onPressed: () => _handleBookNowAction(context),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
