@@ -8,6 +8,7 @@ import 'package:wander_nest/features/filters/presentation/widgets/filter_action_
 import 'package:wander_nest/features/filters/presentation/widgets/filter_overlay_panel.dart';
 import 'package:wander_nest/features/maps/presentation/screens/map_screen.dart';
 import 'package:wander_nest/shared/providers/filtered_campsites_provider.dart';
+import 'package:wander_nest/shared/utils/error_messages.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -72,7 +73,7 @@ class HomeScreen extends ConsumerWidget {
               loading: () => const Center(child: CircularProgressIndicator()),
               error:
                   (err, _) => AppErrorMessage(
-                    message: 'Error: ${err.toString()}',
+                    message: ErrorMessages.from(err),
                     onRetry: () => ref.refresh(campsiteListProvider),
                   ),
               data: (allCampsites) {
