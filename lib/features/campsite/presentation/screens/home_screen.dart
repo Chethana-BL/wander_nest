@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wander_nest/core/constants/app_icons.dart';
 import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/app_error_message.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/app_tagline_banner.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/responsive_campsite_view.dart';
+import 'package:wander_nest/features/favourites/presentation/screens/favourite_campsites_page.dart';
 import 'package:wander_nest/features/filters/presentation/widgets/filter_action_icon.dart';
 import 'package:wander_nest/features/filters/presentation/widgets/filter_overlay_panel.dart';
 import 'package:wander_nest/features/maps/presentation/screens/map_screen.dart';
@@ -44,7 +46,7 @@ class HomeScreen extends ConsumerWidget {
         actions: [
           // View Map
           IconButton(
-            icon: const Icon(Icons.map),
+            icon: const Icon(AppIcons.map),
             onPressed: () {
               _handleMapIconPressed(
                 context,
@@ -62,6 +64,17 @@ class HomeScreen extends ConsumerWidget {
                     builder: (_) => const FilterOverlayPanel(),
                   ),
             ),
+          IconButton(
+            icon: const Icon(AppIcons.favorite),
+            tooltip: 'View favourites',
+            onPressed:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const FavouriteCampsitesPage(),
+                  ),
+                ),
+          ),
         ],
       ),
       body: Column(
