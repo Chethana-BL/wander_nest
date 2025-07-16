@@ -28,7 +28,10 @@ class ResultSummaryBanner extends StatelessWidget {
             : '$totalCount campsites available';
 
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: AppSizes.paddingSM),
+      margin: const EdgeInsets.symmetric(
+        vertical: AppSizes.paddingSM,
+        horizontal: AppSizes.paddingSM,
+      ),
       color: Theme.of(context).colorScheme.primary.alphaF(0.2),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSizes.radius),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wander_nest/core/constants/app_icons.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/features/campsite/presentation/providers/campsite_providers.dart';
+import 'package:wander_nest/features/campsite/presentation/providers/search_providers.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/app_error_message.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/app_tagline_banner.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/responsive_campsite_view.dart';
@@ -10,7 +11,6 @@ import 'package:wander_nest/features/favourites/presentation/screens/favourite_c
 import 'package:wander_nest/features/filters/presentation/widgets/filter_action_icon.dart';
 import 'package:wander_nest/features/filters/presentation/widgets/filter_overlay_panel.dart';
 import 'package:wander_nest/features/maps/presentation/screens/map_screen.dart';
-import 'package:wander_nest/shared/providers/filtered_campsites_provider.dart';
 import 'package:wander_nest/shared/utils/error_messages.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -38,7 +38,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final campsiteListAsync = ref.watch(campsiteListProvider);
-    final filteredCampsites = ref.watch(filteredCampsitesProvider);
+    final filteredCampsites = ref.watch(searchedCampsitesProvider);
     final isCompact = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
