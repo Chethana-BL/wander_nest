@@ -31,7 +31,6 @@ class AnimatedGridView<T> extends StatelessWidget {
 
     return AnimationLimiter(
       child: GridView.builder(
-        padding: const EdgeInsets.all(AppSizes.padding),
         itemCount: items.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,
@@ -79,7 +78,7 @@ class AnimatedListView<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimationLimiter(
       child: ListView.separated(
-        padding: const EdgeInsets.all(AppSizes.padding),
+        padding: const EdgeInsets.symmetric(vertical: AppSizes.paddingSM),
         itemCount: items.length,
         separatorBuilder: (_, __) => const SizedBox(height: AppSizes.space),
         itemBuilder: (context, index) {

@@ -37,16 +37,13 @@ class HomeCompactLayout extends ConsumerWidget {
       children: [
         if (!filter.isDefault)
           const Padding(
-            padding: EdgeInsets.only(top: AppSizes.padding),
+            padding: EdgeInsets.symmetric(vertical: AppSizes.paddingSM),
             child: ActiveFilterChips(),
           ),
         if (filteredCampsites.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(top: AppSizes.padding),
-            child: ResultSummaryBanner(
-              totalCount: campsites.length,
-              filteredCount: filteredCampsites.length,
-            ),
+          ResultSummaryBanner(
+            totalCount: campsites.length,
+            filteredCount: filteredCampsites.length,
           ),
         Expanded(child: content),
       ],

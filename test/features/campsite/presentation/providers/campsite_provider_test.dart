@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:wander_nest/features/campsite/data/models/campsite_model.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
 import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
-import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
+import 'package:wander_nest/features/campsite/presentation/providers/campsite_providers.dart';
 
 import '../../../../mocks/mocks.mocks.dart';
 

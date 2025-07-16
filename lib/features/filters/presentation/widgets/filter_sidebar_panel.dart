@@ -25,10 +25,7 @@ class FilterSidebarPanel extends ConsumerWidget {
     return Drawer(
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSizes.paddingSM,
-            vertical: AppSizes.padding,
-          ),
+          padding: const EdgeInsets.all(AppSizes.paddingSM),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

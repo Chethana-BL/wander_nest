@@ -25,48 +25,43 @@ class HomeWideLayout extends ConsumerWidget {
     final filterPanelWidth = 300;
     final availableWidth = width - filterPanelWidth;
 
-    return Padding(
-      padding: const EdgeInsets.all(AppSizes.padding),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Left-side filter panel
-          SizedBox(
-            width: filterPanelWidth.toDouble(),
-            child: const FilterSidebarPanel(),
-          ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Left-side filter panel
+        SizedBox(
+          width: filterPanelWidth.toDouble(),
+          child: const FilterSidebarPanel(),
+        ),
 
-          const SizedBox(width: AppSizes.space),
+        const SizedBox(width: AppSizes.space),
 
-          // Right-side filtered list of campsites
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: AppSizes.space),
-                if (filteredCampsites.isNotEmpty)
-                  ResultSummaryBanner(
-                    totalCount: campsites.length,
-                    filteredCount: filteredCampsites.length,
+        // Right-side filtered list of campsites
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (filteredCampsites.isNotEmpty)
+                ResultSummaryBanner(
+                  totalCount: campsites.length,
+                  filteredCount: filteredCampsites.length,
+                ),
+
+              if (filteredCampsites.isEmpty)
+                const Expanded(child: NoCampsiteFound())
+              else
+                Expanded(
+                  child: AnimatedGridView<Campsite>(
+                    items: filteredCampsites,
+                    maxWidth: availableWidth,
+                    itemBuilder:
+                        (context, campsite) => CampsiteCard(campsite: campsite),
                   ),
-
-                if (filteredCampsites.isEmpty)
-                  const Expanded(child: NoCampsiteFound())
-                else
-                  Expanded(
-                    child: AnimatedGridView<Campsite>(
-                      items: filteredCampsites,
-                      maxWidth: availableWidth,
-                      itemBuilder:
-                          (context, campsite) =>
-                              CampsiteCard(campsite: campsite),
-                    ),
-                  ),
-              ],
-            ),
+                ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

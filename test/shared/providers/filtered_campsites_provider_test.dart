@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
 import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
-import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
+import 'package:wander_nest/features/campsite/presentation/providers/campsite_providers.dart';
 import 'package:wander_nest/features/filters/domain/entities/filter_enums.dart';
 import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
 import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';

@@ -74,7 +74,7 @@ class ActiveFilterChips extends ConsumerWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizes.padding),
+      padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingSM),
       child: Wrap(
         spacing: AppSizes.spaceSM,
         runSpacing: AppSizes.spaceXS,
