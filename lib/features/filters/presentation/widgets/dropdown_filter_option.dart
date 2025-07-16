@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wander_nest/core/constants/app_sizes.dart';
 
 class DropdownFilterOption<T> extends StatelessWidget {
   const DropdownFilterOption({
@@ -21,6 +22,7 @@ class DropdownFilterOption<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.all(AppSizes.paddingXS),
       leading: Icon(icon),
       title: Text(title),
       trailing: DropdownButton<T>(

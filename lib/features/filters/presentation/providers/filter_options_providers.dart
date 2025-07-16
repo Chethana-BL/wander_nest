@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
+import 'package:wander_nest/features/campsite/presentation/providers/campsite_providers.dart';
 
 final priceRangeProvider = Provider<RangeValues>((ref) {
   final campsites = ref.watch(sortedCampsiteListProvider);

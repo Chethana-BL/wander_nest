@@ -21,7 +21,7 @@ class PriceRangeSlider extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(AppSizes.padding),
+          padding: const EdgeInsets.all(AppSizes.paddingXS),
           child: Text(
             'Price Range (€${currentRange.start.round()} - €${currentRange.end.round()})',
             style: Theme.of(context).textTheme.titleMedium,

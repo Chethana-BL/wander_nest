@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wander_nest/core/constants/app_icons.dart';
-import 'package:wander_nest/features/campsite/presentation/providers/campsite_provider.dart';
+import 'package:wander_nest/core/constants/app_sizes.dart';
+import 'package:wander_nest/features/campsite/presentation/providers/campsite_providers.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/app_error_message.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/app_tagline_banner.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/responsive_campsite_view.dart';
@@ -77,27 +78,33 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const AppTaglineBanner(),
-          Expanded(
-            child: campsiteListAsync.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error:
-                  (err, _) => AppErrorMessage(
-                    message: ErrorMessages.from(err),
-                    onRetry: () => ref.refresh(campsiteListProvider),
-                  ),
-              data: (allCampsites) {
-                return ResponsiveCampsiteView(
-                  campsites: allCampsites,
-                  filteredCampsites: filteredCampsites,
-                );
-              },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSizes.padding,
+          vertical: AppSizes.spaceSM,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const AppTaglineBanner(),
+            Expanded(
+              child: campsiteListAsync.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error:
+                    (err, _) => AppErrorMessage(
+                      message: ErrorMessages.from(err),
+                      onRetry: () => ref.refresh(campsiteListProvider),
+                    ),
+                data: (allCampsites) {
+                  return ResponsiveCampsiteView(
+                    campsites: allCampsites,
+                    filteredCampsites: filteredCampsites,
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

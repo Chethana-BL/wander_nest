@@ -11,10 +11,7 @@ class AppTaglineBanner extends StatelessWidget {
     final color = Theme.of(context).colorScheme.primary;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSizes.padding,
-        vertical: AppSizes.spaceSM,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: AppSizes.spaceSM),
       child: Container(
         padding: const EdgeInsets.all(AppSizes.padding),
         decoration: BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wander_nest/core/constants/app_sizes.dart';
 
 class LanguageFilterSelector extends StatefulWidget {
   const LanguageFilterSelector({
@@ -42,6 +43,7 @@ class _LanguageFilterSelectorState extends State<LanguageFilterSelector> {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
+      tilePadding: const EdgeInsets.all(AppSizes.paddingXS),
       title: const Text('Host Languages'),
       children: [
         CheckboxListTile(
