@@ -5,6 +5,7 @@ import 'package:wander_nest/core/themes/app_custom_colors.dart';
 import 'package:wander_nest/core/widgets/buttons/primary_button.dart';
 import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_feature_badge.dart';
+import 'package:wander_nest/features/favourites/presentation/widgets/favourite_button.dart';
 import 'package:wander_nest/features/maps/presentation/widgets/campsite_detail_map.dart';
 
 class CampsiteDetailScreen extends StatelessWidget {
@@ -27,7 +28,10 @@ class CampsiteDetailScreen extends StatelessWidget {
     final campsiteName = campsite.name;
 
     return Scaffold(
-      appBar: AppBar(title: Text(campsiteName)),
+      appBar: AppBar(
+        title: Text(campsiteName),
+        actions: [FavouriteButton(campsiteId: campsite.id)],
+      ),
       bottomNavigationBar: PrimaryButton(
         label: 'Book Now',
         onPressed: () => _handleBookNowAction(context),

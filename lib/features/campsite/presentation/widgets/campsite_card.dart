@@ -3,6 +3,7 @@ import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/navigation/campsite_routes.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_feature_row.dart';
+import 'package:wander_nest/features/favourites/presentation/widgets/favourite_button.dart';
 
 class CampsiteCard extends StatelessWidget {
   const CampsiteCard({super.key, required this.campsite});
@@ -30,16 +31,26 @@ class CampsiteCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Image
-                AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Image.network(
-                    campsite.photoUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder:
-                        (context, error, stackTrace) => const Center(
-                          child: Icon(Icons.image_not_supported),
-                        ),
-                  ),
+                Stack(
+                  children: [
+                    AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Image.network(
+                        campsite.photoUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder:
+                            (context, error, stackTrace) => const Center(
+                              child: Icon(Icons.image_not_supported),
+                            ),
+                      ),
+                    ),
+
+                    Positioned(
+                      top: AppSizes.spaceSM,
+                      right: AppSizes.spaceSM,
+                      child: FavouriteButton(campsiteId: campsite.id),
+                    ),
+                  ],
                 ),
 
                 Padding(

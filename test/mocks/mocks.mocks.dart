@@ -16,6 +16,8 @@ import 'package:wander_nest/features/campsite/domain/entities/campsite.dart'
     as _i8;
 import 'package:wander_nest/features/campsite/domain/repositories/campsite_repository.dart'
     as _i7;
+import 'package:wander_nest/features/favourites/domain/repositories/favourites_repository.dart'
+    as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -91,4 +93,36 @@ class MockCampsiteRepository extends _i1.Mock
             returnValue: _i5.Future<List<_i8.Campsite>>.value(<_i8.Campsite>[]),
           )
           as _i5.Future<List<_i8.Campsite>>);
+}
+
+/// A class which mocks [FavouritesRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFavouritesRepository extends _i1.Mock
+    implements _i9.FavouritesRepository {
+  MockFavouritesRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  Set<String> getFavouriteIds() =>
+      (super.noSuchMethod(
+            Invocation.method(#getFavouriteIds, []),
+            returnValue: <String>{},
+          )
+          as Set<String>);
+
+  @override
+  bool isFavourite(String? campsiteId) =>
+      (super.noSuchMethod(
+            Invocation.method(#isFavourite, [campsiteId]),
+            returnValue: false,
+          )
+          as bool);
+
+  @override
+  void toggleFavourite(String? campsiteId) => super.noSuchMethod(
+    Invocation.method(#toggleFavourite, [campsiteId]),
+    returnValueForMissingStub: null,
+  );
 }

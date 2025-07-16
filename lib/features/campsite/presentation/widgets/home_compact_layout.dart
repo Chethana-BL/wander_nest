@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
 import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_card.dart';
@@ -9,6 +8,7 @@ import 'package:wander_nest/features/campsite/presentation/widgets/result_summar
 import 'package:wander_nest/features/filters/domain/entities/filter_state.dart';
 import 'package:wander_nest/features/filters/presentation/providers/campsite_filter_notifier.dart';
 import 'package:wander_nest/features/filters/presentation/widgets/active_filter_chips.dart';
+import 'package:wander_nest/shared/widgets/animated_lists.dart';
 
 class HomeCompactLayout extends ConsumerWidget {
   const HomeCompactLayout({
@@ -27,23 +27,9 @@ class HomeCompactLayout extends ConsumerWidget {
     Widget content = const NoCampsiteFound();
 
     if (filteredCampsites.isNotEmpty) {
-      content = AnimationLimiter(
-        child: ListView.separated(
-          padding: const EdgeInsets.all(AppSizes.padding),
-          itemCount: filteredCampsites.length,
-          separatorBuilder: (_, __) => const SizedBox(height: AppSizes.space),
-          itemBuilder: (context, index) {
-            final campsite = filteredCampsites[index];
-            return AnimationConfiguration.staggeredList(
-              position: index,
-              duration: const Duration(milliseconds: 400),
-              child: SlideAnimation(
-                verticalOffset: 50.0,
-                child: FadeInAnimation(child: CampsiteCard(campsite: campsite)),
-              ),
-            );
-          },
-        ),
+      content = AnimatedListView<Campsite>(
+        items: filteredCampsites,
+        itemBuilder: (context, campsite) => CampsiteCard(campsite: campsite),
       );
     }
 
