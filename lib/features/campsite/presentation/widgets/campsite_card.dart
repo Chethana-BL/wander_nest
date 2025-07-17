@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
+import 'package:wander_nest/core/navigation/app_routes.dart';
 import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
-import 'package:wander_nest/features/campsite/presentation/navigation/campsite_routes.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/campsite_feature_row.dart';
 import 'package:wander_nest/features/favourites/presentation/widgets/favourite_button.dart';
 
@@ -24,7 +25,11 @@ class CampsiteCard extends StatelessWidget {
           final cardWidth = constraints.maxWidth;
 
           return InkWell(
-            onTap: () => navigateToCampsiteDetail(context, campsite),
+            onTap:
+                () => context.pushNamed(
+                  AppRoutes.campsiteDetailName,
+                  extra: campsite,
+                ),
             borderRadius: BorderRadius.circular(AppSizes.radius),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
