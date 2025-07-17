@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wander_nest/core/constants/app_icons.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
+import 'package:wander_nest/core/navigation/app_routes.dart';
 import 'package:wander_nest/core/themes/app_custom_colors.dart';
 import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
-import 'package:wander_nest/features/campsite/presentation/navigation/campsite_routes.dart';
 import 'package:wander_nest/shared/extensions/color_extensions.dart';
 
 class CampsiteClusterPreviewList extends StatelessWidget {
@@ -45,7 +46,10 @@ class CampsiteClusterPreviewList extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pop(); // Close the bottom sheet
                 // Navigate to the campsite detail screen
-                navigateToCampsiteDetail(context, campsite);
+                context.pushNamed(
+                  AppRoutes.campsiteDetailName,
+                  extra: campsite,
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.all(AppSizes.padding),

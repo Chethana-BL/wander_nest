@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wander_nest/features/campsite/data/models/geo_location.dart';
-
 import 'package:wander_nest/features/campsite/domain/entities/campsite.dart';
 import 'package:wander_nest/features/campsite/presentation/providers/search_providers.dart';
 import 'package:wander_nest/shared/providers/filtered_campsites_provider.dart';

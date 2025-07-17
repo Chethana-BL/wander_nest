@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:wander_nest/core/constants/app_sizes.dart';
-import 'package:wander_nest/features/campsite/presentation/navigation/campsite_routes.dart';
+import 'package:wander_nest/core/navigation/app_routes.dart';
 import 'package:wander_nest/features/maps/domain/entities/map_cluster.dart';
 import 'package:wander_nest/features/maps/presentation/providers/map_providers.dart';
 import 'package:wander_nest/features/maps/presentation/widgets/campsite_cluster_preview_list.dart';
@@ -137,8 +138,11 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                 CampsiteClusterPreviewList(campsites: cluster.campsites),
       );
     } else {
-      // Single campsite - navigate to detail or show popup
-      navigateToCampsiteDetail(context, cluster.firstCampsite);
+      // Single campsite - navigate to detail screen
+      context.pushNamed(
+        AppRoutes.campsiteDetailName,
+        extra: cluster.firstCampsite,
+      );
     }
   }
 }
