@@ -9,7 +9,6 @@ import 'package:wander_nest/features/campsite/presentation/providers/search_prov
 import 'package:wander_nest/features/campsite/presentation/widgets/app_error_message.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/app_tagline_banner.dart';
 import 'package:wander_nest/features/campsite/presentation/widgets/responsive_campsite_view.dart';
-import 'package:wander_nest/features/favourites/presentation/screens/favourite_campsites_page.dart';
 import 'package:wander_nest/features/filters/presentation/widgets/filter_action_icon.dart';
 import 'package:wander_nest/features/filters/presentation/widgets/filter_overlay_panel.dart';
 import 'package:wander_nest/shared/utils/error_messages.dart';
